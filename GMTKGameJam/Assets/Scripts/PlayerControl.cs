@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -8,18 +9,21 @@ public class PlayerControl : MonoBehaviour
     public GameObject playerObject;
     public GameObject interactiveObject;
 
-	private float playerSpeed = 3f;
-    private float moveDirection = -1f;
+    private float playerSpeed = 3f;
+    private float moveDirection = 0f;
+    private float playerPos;
 
     private bool playerActionEnabled;
     private int totalNumberOfActions = 0;
-    // private int currentActionNumber = 0;
     private List<bool> actionToDo = new List<bool>();
     private List<bool> actionsDone = new List<bool>();
     private List<float> interactiveObjectPositionX = new List<float>();
+    private float interactiveObjectPosition;
+    private float threshold = 0.5f;
 
     private void Awake() {
         playerBody = GetComponent<Rigidbody2D>();
+        playerPos = playerBody.gameObject.transform.position.x;
         playerActionEnabled = false;
         foreach(Transform currentChild in interactiveObject.transform){
             totalNumberOfActions++;
@@ -30,7 +34,6 @@ public class PlayerControl : MonoBehaviour
     }
 
     void Start() {
-
     }
 
     void Update() {
@@ -38,6 +41,8 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate() {
         for (int actionNumber = 0; actionNumber < totalNumberOfActions; actionNumber++)
+            interactiveObjectPosition = interactiveObjectPositionX[actionNumber];
+            moveDirection = CalculateMoveDirection(playerPos, interactiveObjectPosition);
             StartCoroutine(ActionFunction(actionNumber));
     }
 
@@ -47,15 +52,20 @@ public class PlayerControl : MonoBehaviour
 
     private IEnumerator ActionFunction(int currentAction) {
         MovePlayer();
-        float playerPos = Math.abs(playerBody.gameObject.transform.position.x);
-        if(playerPos >= (interactiveObjectPositionX[currentAction] * moveDirection)) {
+        playerPos = playerBody.gameObject.transform.position.x;
+        if((playerPos >= interactiveObjectPosition - threshold) && (playerPos <= interactiveObjectPosition + threshold)) {
             playerActionEnabled = true;
             actionToDo[currentAction] = true;
             moveDirection = 0f;
             yield return new WaitForSecondsRealtime(2);
-            currentAction++;
-            moveDirection = interactiveObjectPositionX[currentAction];
         }
+    }
+
+    private float CalculateMoveDirection(float currentPos, float nextPos) {
+        float nextMoveDirection;
+        float distance = (nextPos - currentPos);
+        nextMoveDirection = distance/Math.Abs(distance);
+        return nextMoveDirection;
     }
 
 }
