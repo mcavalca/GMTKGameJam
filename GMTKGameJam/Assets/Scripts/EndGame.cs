@@ -9,15 +9,16 @@ public class EndGame : MonoBehaviour
 
     public GameObject startMenuInfo;
     public TextMeshProUGUI pointsText;
-    public GameObject playerObject;
+    //private GameObject playerObject = null;
 
     void OnEnable(){
-        playerObject = GameObject.Find("Player");
+        //playerObject = GameObject.Find("Player");
     }
 
-    void Awake() {
+    void Awake() { /*
         print(playerObject.GetComponent<PlayerControl>().playerPoints);
         pointsText.text = playerObject.GetComponent<PlayerControl>().playerPoints.ToString();
+        */
     }
 
     void Update() {
