@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6132240700194396036}
-  - component: {fileID: 5561577735572489717}
   - component: {fileID: 879663578585855428}
+  - component: {fileID: 5561577735572489717}
+  - component: {fileID: -6594426815162133421}
   m_Layer: 0
   m_Name: InteractiveObject
   m_TagString: Untagged
@@ -32,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5561577735572489717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 383235024857924759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8438dfa8c80cabc4da307e1337fa2e39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactiveActionPoint: 
 --- !u!212 &879663578585855428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95,3 +83,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5561577735572489717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383235024857924759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8438dfa8c80cabc4da307e1337fa2e39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactiveObject: {fileID: 383235024857924759}
+  interactiveTotalActions: 0
+  interactiveActionPoint: 
+  isPorta: 0
+--- !u!114 &-6594426815162133421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383235024857924759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80123f736db86248ae4357d835a1047, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactiveObject: {fileID: 383235024857924759}
+  interactiveObjectSprite:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  interactiveTotal: 0
