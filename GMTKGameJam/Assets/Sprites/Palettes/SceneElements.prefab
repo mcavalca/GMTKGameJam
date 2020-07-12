@@ -82,7 +82,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: fad96727c9d96784c930333b0c80508b, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 2afa88ae1bfda304281d1d28dc558eba, type: 2}
+    m_Data: {fileID: 11400000, guid: b05866149f7aec24c96937bb9d683fcf, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 50c836f36045fc140b836c0250ccf1b6, type: 2}
   - m_RefCount: 1
@@ -92,8 +92,7 @@ Tilemap:
     m_Data: {fileID: 4268575086044188125, guid: 5571000232b214f4aa020267745959bb,
       type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -5570193700326103325, guid: 5571000232b214f4aa020267745959bb,
-      type: 3}
+    m_Data: {fileID: 21300000, guid: 926cd67555251ca4092f7de1893b1344, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 2159900068537785849, guid: 5571000232b214f4aa020267745959bb,
       type: 3}

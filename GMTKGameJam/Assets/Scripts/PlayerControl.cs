@@ -22,9 +22,10 @@ public class PlayerControl : MonoBehaviour
     private float playerSpeed = 3f;
     private float moveDirection = 0f;
     private float playerPos;
-    public static int playerPoints = 0;
+    public int playerPoints = 0;
     private bool facingRight;
     private bool playerIsOnBanheiro;
+    private bool continueRunning= true;
 
     private float portaQuartoPosition = -1f;
     private float portaBanheiroPosition = -49.346f;
@@ -75,25 +76,29 @@ public class PlayerControl : MonoBehaviour
     }
 
     void Update() {
-        if(Input.GetKeyDown(KeyCode.Escape) && pauseMenu.GetComponent<BackToGame>().activatePauseMenu){
-            Time.timeScale = 0;
-            pauseMenu.SetActive(true);
+        if (continueRunning) {
+            if(Input.GetKeyDown(KeyCode.Escape) && pauseMenu.GetComponent<BackToGame>().activatePauseMenu){
+                Time.timeScale = 0;
+                pauseMenu.SetActive(true);
+            }
         }
     }
 
     private void FixedUpdate() {
-        playerPos = playerBody.gameObject.transform.position.x;
-        MovePlayer();
-        MoveCamera();
-        playerObject.GetComponent<Animator>().SetBool("isWalking", checkPlayerMoving(moveDirection));
-        if((playerPos >= interactiveObjectPosition - threshold) && (playerPos <= interactiveObjectPosition + threshold) && (isAction)) {
-            if(actionNumber == 1 || actionNumber == 2) interactiveObjectList[2].GetComponent<Animator>().SetBool("chuveiroLigado", true);
-            if(totalNumberOfActions != actionNumber) {
-                isAction = false;
-                actionCoroutine = ActionFunction(actionNumber);
-                StartCoroutine(actionCoroutine);
-            } else {
-                StartCoroutine(StartEndGame());
+        if (continueRunning) {
+            playerPos = playerBody.gameObject.transform.position.x;
+            MovePlayer();
+            MoveCamera();
+            playerObject.GetComponent<Animator>().SetBool("isWalking", checkPlayerMoving(moveDirection));
+            if((playerPos >= interactiveObjectPosition - threshold) && (playerPos <= interactiveObjectPosition + threshold) && (isAction)) {
+                if(actionNumber == 1 || actionNumber == 2) interactiveObjectList[2].GetComponent<Animator>().SetBool("chuveiroLigado", true);
+                if(totalNumberOfActions != actionNumber) {
+                    isAction = false;
+                    actionCoroutine = ActionFunction(actionNumber);
+                    StartCoroutine(actionCoroutine);
+                } else {
+                    StartCoroutine(StartEndGame());
+                }
             }
         }
     }
@@ -180,6 +185,10 @@ public class PlayerControl : MonoBehaviour
     public IEnumerator StartEndGame() {
         moveDirection = 0f;
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (continueRunning) {
+            continueRunning = false;
+            DontDestroyOnLoad(this.gameObject.transform);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }
